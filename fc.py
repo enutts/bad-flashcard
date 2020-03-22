@@ -13,6 +13,22 @@ Decks:
         test question 1 :: answer 1
         test question 2 :: answer 2
 """
+def get_decks(args):
+    decks = []
+    for arg in sys.argv:
+        try:
+            with open(arg, 'r') as deckfile:
+                decks.append(deckfile.readlines())
+        except filename as err:
+            return err
+    
+    new = []
+    for deck in decks:
+        for card in deck:
+            new.append(card)
+
+    return new
+
 def study(deck):
     print('\n\t--hit enter to flip cards--\n')
     
@@ -37,23 +53,14 @@ def main():
             sys.argv.pop(sys.argv.index('-s'))
     else:
         print('something went wrong')
-    
-    # refactor --from here --
+
     sys.argv.pop(0)
-    decks = []
-    for arg in sys.argv:
-        try:
-            with open(arg, 'r') as deckfile:
-                decks.append(deckfile.readlines())
-        except:
-            print('it doesn\'t seem that deck exists')
-    
-    new = []
-    for deck in decks:
-        for card in deck:
-            new.append(card)
-    # -- to here --
-    
+
+    try:
+        new = get_decks(sys.argv)
+    except:
+        print('That deck doesn\'t seem to exist')
+
     if Shuffle == True:
         shuffle(new)
         study(new)
