@@ -13,25 +13,52 @@ Decks:
         test question 1 :: answer 1
         test question 2 :: answer 2
 """
-
-def main():
-    try:
-        deck = sys.argv[1]
-        print(deck)
-    except:
-        print(helpstr)
-
-    with open(deck, 'r') as f:
-        deck = list(f)
-    
+def study(deck):
     print('\n\t--hit enter to flip cards--\n')
     
-    shuffle(deck)
-
     for qa in deck:
         q, a = qa.split('::')
         input(q)
         print(a)
+    
+def main():
+    # Options
+    Shuffle = True
+
+    if len(sys.argv) == 1:
+        print(helpstr)
+        return
+    elif len(sys.argv) >= 2:
+        if '-h' in sys.argv or '--help' in sys.argv:
+            print(helpstr)
+            return
+        if '-s' in sys.argv:
+            Shuffle = False
+            sys.argv.pop(sys.argv.index('-s'))
+    else:
+        print('something went wrong')
+    
+    # refactor --from here --
+    sys.argv.pop(0)
+    decks = []
+    for arg in sys.argv:
+        try:
+            with open(arg, 'r') as deckfile:
+                decks.append(deckfile.readlines())
+        except:
+            print('it doesn\'t seem that deck exists')
+    
+    new = []
+    for deck in decks:
+        for card in deck:
+            new.append(card)
+    # -- to here --
+    
+    if Shuffle == True:
+        shuffle(new)
+        study(new)
+    else:
+        study(new)
 
 if __name__ == '__main__':
     main()
