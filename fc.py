@@ -2,10 +2,14 @@ import sys
 from random import shuffle
 
 helpstr = """
-Usage: sfc [directory of deck] 
+Usage: sfc [options] [directory of deck(s)] 
 
 sfc or simple flash card is a minimum compliant command line flashcard tool that reads deck files
 and acts like a helpful friend helping you study by holding your flashcards and shuffling them for you
+
+Options:
+    -h, --help : Print Help
+    -s         : Don't Shuffle
 
 Decks:
     save decks in text files with questions and answers on one line seperated by '::'
