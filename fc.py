@@ -14,8 +14,8 @@ Options:
 Decks:
     save decks in text files with questions and answers on one line seperated by '::'
     example: 
-        test question 1 :: answer 1
-        test question 2 :: answer 2
+        question 1 :: answer 1
+        question 2 :: answer 2
 """
 def get_decks(args):
     decks = []
@@ -23,8 +23,8 @@ def get_decks(args):
         try:
             with open(arg, 'r') as deckfile:
                 decks.append(deckfile.readlines())
-        except filename as err:
-            return err
+        except IOError:
+            print("File does not appear to exist")
     
     new = []
     for deck in decks:

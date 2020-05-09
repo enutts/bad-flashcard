@@ -1,0 +1,8 @@
+{
+    "name": "test_deck",
+    "cards": {
+        "q1": "test question 1 :: test answer 1",
+        "q2": "test question 2 :: test answer 2",
+        "q3": "test question 3 :: test answer 3"
+    }
+}
